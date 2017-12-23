@@ -19,8 +19,6 @@
 
 enum preonic_layers {
   _QWERTY,
-  _COLEMAK,
-  _DVORAK,
   _LOWER,
   _RAISE,
   _ADJUST
@@ -37,23 +35,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
- * |   `  |   1  |   2  |   3  |   4  |   5  | Bksp |   6  |   7  |   8  |   9  |   0  |
+ * | Esc  |   1  |   2  |   3  |   4  |   5  | Del  |   6  |   7  |   8  |   9  |   0  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |   Q  |   W  |   E  |   R  |   T  | Del  |   Y  |   U  |   I  |   O  |   P  |
+ * |   `  |   Q  |   W  |   E  |   R  |   T  | Bksp |   Y  |   U  |   I  |   O  |   P  |
  * |------+------+------+------+------+------+-------------+------+------+------+------|
- * | Tab  |   A  |   S  |   D  |   F  |   G  |  "   |   H  |   J  |   K  |   L  |   ;  |
+ * | Tab  |   A  |   S  |   D  |   F  |   G  | Enter|   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+------+------+------|------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |Enter |   N  |   M  |   ,  |   .  |   /  |
+ * | Shift|   Z  |   X  |   C  |   V  |   B  | Ctrl |   N  |   M  |   ,  |   .  |   /  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Brite| Ctrl | Alt  | GUI  |Lower | Spac | Right| Spac |Raise | Left | Down |  Up  |
+ * | LEFT | UP   | DOWN | RIGHT| Lower| Spac | Shift| Raise| OS   |      |      |      |
  * `-----------------------------------------------------------------------------------'
+
+KC_LALT - Alt
+KC_LGUI - Windows
  */
 [_QWERTY] = {
-  {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_BSPC,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0   },
-  {KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_DEL ,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P   },
-  {KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_QUOT,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_ENT ,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH},
-  {BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_RGHT,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP  }
+  {KC_ESC,  KC_1,    KC_2,    KC_3,     KC_4,    KC_5,    KC_DEL ,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0   },
+  {KC_GRV,  KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,    KC_BSPC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P   },
+  {KC_TAB,  KC_A,    KC_S,    KC_D,     KC_F,    KC_G,    KC_ENT,   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN},
+  {KC_LSFT, KC_Z,    KC_X,    KC_C,     KC_V,    KC_B,    KC_LCTL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH},
+  {KC_LEFT, KC_UP,   KC_DOWN, KC_RIGHT, LOWER,   KC_SPC,  KC_LSFT,  RAISE,   KC_LGUI, KC_SPC,  KC_SPC,  KC_SPC }
 },
 
 /* Lower
