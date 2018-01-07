@@ -1,17 +1,21 @@
-/* Copyright 2015-2017 Jack Humbert
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+/* 
+
+
+This has some tricks to do stuff.  
+ 
+	- atomic/keymaps/pvc/keymap.c
+	- ergodox_ez/keymaps/drashna <- these have a symbol layer similar to what I want
+	- TODO: look at the ergodox editor to see if it will export this kind of thing
+
+	- This is how to get the shifted keys:
+		- https://docs.qmk.fm/feature_advanced_keycodes.html#shifted-keycodes
+
+
+
+
+
+
+
  */
 
 #include "preonic.h"
@@ -88,21 +92,21 @@ This is the functionality to allow multiple keys to do multiple things.
  * ,-----------------------------------------------------------------------------------.
  * |      |   1  |   2  |   3  |   4  |   5  |      |   6  |   7  |   8  |   9  |  0   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |   `  |   !  |   @  |   #  |   $  |   %  |      |   ^  |   &  |   |  |   -  |  ;   |
+ * |   `  |   !  |   @  |   #  |   $  |   %  |      |   ^  |   &  |   *  |   -  |  ;   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |      |   -  |   =  |   [  |   ]  |  \   |
+ * |      |  <   |  {   |   [  |  (   |  "   |      |   =  |      |   /  |   +  |  ;   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  F7  |  F8  |  F9  |  F10 |  F11 |      |ISO # |ISO / |      |      |      |
+ * |      |  ~   |  _   |  \   |  `   |      |      |      |   |  |   ,  |   .  |  ?   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = {
-  {_______,  KC_1,     KC_2,    KC_3,    KC_4,    KC_5,     _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0},
-  {_______,  KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC,  _______, KC_CIRC, KC_AMPR, KC_ASTR, _______,    KC_0},
-  {_______,  KC_F1,    KC_F2,   KC_F3,   KC_F4,   KC_F5,    _______, KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC},
-  {_______,  KC_F7,    KC_F8,   KC_F9,   KC_F10,  KC_F11,   _______, KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN},
-  {_______,  _______, _______, _______, _______, _______,   _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU}
+ {_______,KC_F1,                 KC_F2,               KC_F3,       KC_F4,         KC_F5,           _______, KC_F6,   KC_F7,    KC_F8,    KC_F9,    KC_F10},
+ {_______,KC_EXLM,               KC_AT,               KC_HASH,     KC_DLR,        KC_PERC,         _______, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_MINUS, KC_COLON},
+ {_______,KC_LEFT_ANGLE_BRACKET, KC_LEFT_CURLY_BRACE, KC_LBRACKET, KC_LEFT_PAREN, KC_DOUBLE_QUOTE, _______, KC_EQUAL, _______, KC_SLASH, KC_PLUS,  KC_SCOLON},
+ {_______,KC_TILD,               KC_UNDERSCORE,       KC_BSLASH,   KC_GRAVE,      _______,         _______, _______,  KC_PIPE, KC_COMMA, KC_DOT,  KC_SLSH},
+ {_______,_______, _______, _______, _______, _______,   _______, _______, _______,   KC_MNXT,  KC_VOLD,  KC_VOLU}
 },
 
 /* Adjust (Lower + Raise)
