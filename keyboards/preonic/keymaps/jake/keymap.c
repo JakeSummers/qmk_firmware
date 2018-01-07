@@ -35,6 +35,23 @@ enum preonic_keycodes {
   BACKLIT
 };
 
+enum tab_dance{
+	TD_ANGLE_BRACKET=0,
+	TD_CURLY_BRACE,
+	TD_BRACKET,
+	TD_PAREN,
+	TD_QUOTE
+};
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+	[TD_ANGLE_BRACKET] = ACTION_TAP_DANCE_DOUBLE( KC_LEFT_ANGLE_BRACKET, KC_RIGHT_ANGLE_BRACKET ),
+	[TD_CURLY_BRACE]   = ACTION_TAP_DANCE_DOUBLE( KC_LEFT_CURLY_BRACE,   KC_RIGHT_CURLY_BRACE   ),
+	[TD_BRACKET]       = ACTION_TAP_DANCE_DOUBLE( KC_LBRACKET,           KC_RBRACKET            ),
+	[TD_PAREN]         = ACTION_TAP_DANCE_DOUBLE( KC_LEFT_PAREN,         KC_RIGHT_PAREN         ),
+	[TD_QUOTE]         = ACTION_TAP_DANCE_DOUBLE( KC_DOUBLE_QUOTE,       KC_QUOTE               )
+};
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
@@ -45,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+-------------+------+------+------+------|
  * | Tab  |   A  |   S  |   D  |   F  |   G  | Enter|   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+------+------+------|------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  | Ctrl |   N  |   M  |   ,  |   .  |   /  |
+ * | Shift|   Z  |   X  |   C  |   V  |ALT(B)| Tab  |   N  |   M  |   ,  |   .  |   /  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | LEFT | UP   | DOWN | RIGHT| Lower| Spac | Shift| Raise| OS   |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -54,12 +71,18 @@ KC_LALT - Alt
 KC_LGUI - Windows
  */
 [_QWERTY] = {
-  {KC_ESC,  KC_1,    KC_2,    KC_3,     KC_4,    KC_5,    KC_DEL ,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0   },
-  {KC_GRV,  KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,    KC_BSPC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P   },
-  {KC_TAB,  KC_A,    KC_S,    KC_D,     KC_F,    KC_G,    KC_ENT,   KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,     KC_V,    KC_B,    KC_LCTL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH},
-  {KC_LEFT, KC_UP,   KC_DOWN, KC_RIGHT, LOWER,   KC_SPC,  KC_LSFT,  RAISE,   KC_LGUI, KC_SPC,  KC_SPC,  KC_SPC }
+  {KC_ESC,  KC_1,    KC_2,    KC_3,     KC_4,    KC_5,        KC_DEL,   KC_6,        KC_7,    KC_8,    KC_9,    KC_0   },
+  {KC_GRV,  KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,        KC_BSPC,  KC_Y,        KC_U,    KC_I,    KC_O,    KC_P   },
+  {KC_TAB,  KC_A,    KC_S,    KC_D,     KC_F,    KC_G,        KC_ENT,   KC_H,        KC_J,    KC_K,    KC_L,    KC_SCLN},
+  {KC_LSFT, KC_Z,    KC_X,    KC_C,     KC_V,    CTL_T(KC_B), KC_TAB,   ALT_T(KC_N), KC_M,    KC_COMM, KC_DOT,  KC_SLSH},
+  {KC_LEFT, KC_UP,   KC_DOWN, KC_RIGHT, LOWER,   KC_SPC,      KC_LSFT,  RAISE,       KC_LGUI, KC_SPC,  KC_SPC,  KC_SPC }
 },
+
+
+
+
+
+
 
 /* Raise
 
@@ -77,21 +100,16 @@ This is the functionality to allow multiple keys to do multiple things.
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  ~   |  _   |  \   |  `   |      |      |      |   |  |   ,  |   .  |  ?   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = {
- {_______,KC_F1,                 KC_F2,               KC_F3,       KC_F4,         KC_F5,           _______, KC_F6,   KC_F7,    KC_F8,    KC_F9,    KC_F10},
- {_______,KC_EXLM,               KC_AT,               KC_HASH,     KC_DLR,        KC_PERC,         _______, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_MINUS, KC_COLON},
- {_______,KC_LEFT_ANGLE_BRACKET, KC_LEFT_CURLY_BRACE, KC_LBRACKET, KC_LEFT_PAREN, KC_DOUBLE_QUOTE, _______, KC_EQUAL, _______, KC_SLASH, KC_PLUS,  KC_SCOLON},
- {_______,KC_TILD,               KC_UNDERSCORE,       KC_BSLASH,   KC_GRAVE,      _______,         _______, _______,  KC_PIPE, KC_COMMA, KC_DOT,  KC_SLSH},
- {_______,_______, _______, _______, _______, _______,   _______, _______, _______,   KC_MNXT,  KC_VOLD,  KC_VOLU}
+ {_______,KC_F1,                 KC_F2,               KC_F3,          KC_F4,        KC_F5,        _______, KC_F6,   KC_F7,    KC_F8,    KC_F9,    KC_F10},
+ {_______,KC_EXLM,               KC_AT,               KC_HASH,        KC_DLR,       KC_PERC,      _______, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_MINUS, KC_COLON},
+ {_______,TD(TD_ANGLE_BRACKET),  TD(TD_CURLY_BRACE),  TD(TD_BRACKET), TD(TD_PAREN), TD(TD_QUOTE), _______, KC_EQUAL, _______, KC_SLASH, KC_PLUS,  KC_SCOLON},
+ {_______,KC_TILD,               KC_UNDERSCORE,       KC_BSLASH,      KC_GRAVE,     _______,      _______, _______,  KC_PIPE, KC_COMMA, KC_DOT,  KC_SLSH},
+ {_______,_______,               _______,             _______,        _______,      _______,      _______, _______, _______,   _______,  _______,  _______}
 },
-
-
-
-
-
 
 
 
@@ -108,7 +126,7 @@ This is the functionality to allow multiple keys to do multiple things.
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO ~ |ISO | |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |      |      |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = {
