@@ -21,6 +21,10 @@ This has some tricks to do stuff.
 #include "preonic.h"
 #include "action_layer.h"
 
+
+#define workup LALT(LCTL(KC_UP))
+#define workdown LALT(LCTL(KC_DOWN))
+
 enum preonic_layers {
   _QWERTY,
   _LOWER,
@@ -56,26 +60,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
- * | Esc  |   1  |   2  |   3  |   4  |   5  | Del  |   6  |   7  |   8  |   9  |   0  |
+ * | Pg Up|   1  |   2  |   3  |   4  |   5  | Del  |   6  |   7  |   8  |   9  |   0  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |   `  |   Q  |   W  |   E  |   R  |   T  | Bksp |   Y  |   U  |   I  |   O  |   P  |
+ * | PG Dn|   Q  |   W  |   E  |   R  |   T  | Bksp |   Y  |   U  |   I  |   O  |   P  |
  * |------+------+------+------+------+------+-------------+------+------+------+------|
- * | Tab  |   A  |   S  |   D  |   F  |   G  | Enter|   H  |   J  |   K  |   L  |   ;  |
+ * | Shft |   A  |   S  |   D  |   F  |   G  | Enter|   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+------+------+------|------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |CTL(B)| Tab  |ALT(N)|   M  |   ,  |   .  |   /  |
+ * | Ctrl |   Z  |   X  |   C  |   V  |CTL(B)| Tab  |ALT(N)|   M  |   ,  |   .  |   /  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LEFT | UP   | DOWN | RIGHT| Lower| Spac | Shift| Raise| OS   |      |      |      |
+ * | Alt  |  OS  |      |      | Lower| Spac | Raise| Spac | Left | Up   | Down | Right|
  * `-----------------------------------------------------------------------------------'
 
 KC_LALT - Alt
 KC_LGUI - Windows
  */
 [_QWERTY] = {
-  {KC_ESC,  KC_1,    KC_2,    KC_3,     KC_4,    KC_5,        KC_DEL,   KC_6,        KC_7,    KC_8,    KC_9,    KC_0   },
-  {KC_GRV,  KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,        KC_BSPC,  KC_Y,        KC_U,    KC_I,    KC_O,    KC_P   },
-  {KC_TAB,  KC_A,    KC_S,    KC_D,     KC_F,    KC_G,        KC_ENT,   KC_H,        KC_J,    KC_K,    KC_L,    KC_SCLN},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,     KC_V,    CTL_T(KC_B), KC_TAB,   ALT_T(KC_N), KC_M,    KC_COMM, KC_DOT,  KC_SLSH},
-  {KC_LEFT, KC_UP,   KC_DOWN, KC_RIGHT, LOWER,   KC_SPC,      KC_LSFT,  RAISE,       KC_LGUI, KC_SPC,  KC_SPC,  KC_SPC }
+  {KC_PGUP,       KC_1,    KC_2,    KC_3,     KC_4,    KC_5,        KC_DEL,   KC_6,        KC_7,    KC_8,    KC_9,    KC_0   },
+  {KC_PGDOWN,     KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,        KC_BSPC,  KC_Y,        KC_U,    KC_I,    KC_O,    KC_P   },
+  {OSM(MOD_LCTL), KC_A,    KC_S,    KC_D,     KC_F,    KC_G,        KC_ENT,   KC_H,        KC_J,    KC_K,    KC_L,    KC_SCLN},
+  {KC_LSFT,       KC_Z,    KC_X,    KC_C,     KC_V,    KC_B,        KC_TAB,   KC_N,        KC_M,    KC_COMM, KC_DOT,  KC_SLSH},
+  {OSM(MOD_LALT), KC_LGUI, workup,  workdown, LOWER,   KC_SPC,      RAISE,    KC_SPC,      KC_LEFT, KC_UP,   KC_DOWN, KC_RIGHT}
 },
 
 
@@ -98,17 +102,17 @@ This is the functionality to allow multiple keys to do multiple things.
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |  <   |  {   |   [  |  (   |  "   |      |   =  |      |   /  |   +  |  ;   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  ~   |  _   |  \   |  `   |      |      |      |   |  |   ,  |   .  |  ?   |
+ * |      |  ~   |  _   |  \   |  `   | ESC  |      |      |   |  |   ,  |   .  |  ?   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |      |      | Home |      |      | End  |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = {
  {_______,KC_F1,                 KC_F2,               KC_F3,          KC_F4,        KC_F5,        _______, KC_F6,   KC_F7,    KC_F8,    KC_F9,    KC_F10},
  {_______,KC_EXLM,               KC_AT,               KC_HASH,        KC_DLR,       KC_PERC,      _______, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_MINUS, KC_COLON},
  {_______,TD(TD_ANGLE_BRACKET),  TD(TD_CURLY_BRACE),  TD(TD_BRACKET), TD(TD_PAREN), TD(TD_QUOTE), _______, KC_EQUAL, _______, KC_SLASH, KC_PLUS,  KC_SCOLON},
- {_______,KC_TILD,               KC_UNDERSCORE,       KC_BSLASH,      KC_GRAVE,     _______,      _______, _______,  KC_PIPE, KC_COMMA, KC_DOT,  KC_SLSH},
- {_______,_______,               _______,             _______,        _______,      _______,      _______, _______, _______,   _______,  _______,  _______}
+ {_______,KC_TILD,               KC_UNDERSCORE,       KC_BSLASH,      KC_GRAVE,     KC_ESC,       _______, _______,  KC_PIPE, KC_COMMA, KC_DOT,  KC_SLSH},
+ {_______,_______,               _______,             _______,        _______,      _______,      _______, _______, KC_HOME,   _______,  _______,  KC_END}
 },
 
 
