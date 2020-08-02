@@ -111,7 +111,7 @@ This is the functionality to allow multiple keys to do multiple things.
  {_______,KC_F1,                 KC_F2,               KC_F3,          KC_F4,        KC_F5,        _______, KC_F6,   KC_F7,    KC_F8,    KC_F9,    KC_F10},
  {_______,KC_EXLM,               KC_AT,               KC_HASH,        KC_DLR,       KC_PERC,      _______, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_MINUS, KC_COLON},
  {_______,TD(TD_ANGLE_BRACKET),  TD(TD_CURLY_BRACE),  TD(TD_BRACKET), TD(TD_PAREN), TD(TD_QUOTE), _______, KC_EQUAL, _______, KC_SLASH, KC_PLUS,  KC_SCOLON},
- {_______,KC_TILD,               KC_UNDERSCORE,       KC_BSLASH,      KC_GRAVE,     KC_ESC,       _______, _______,  KC_PIPE, KC_COMMA, KC_DOT,  KC_SLSH},
+ {_______,KC_TILD,               KC_UNDERSCORE,       KC_BSLASH,      KC_GRAVE,     KC_ESC,       _______, _______,  KC_PIPE, KC_COMMA, KC_DOT,  KC_QUES},
  {_______,_______,               _______,             _______,        _______,      _______,      _______, _______, KC_HOME,   _______,  _______,  KC_END}
 },
 
