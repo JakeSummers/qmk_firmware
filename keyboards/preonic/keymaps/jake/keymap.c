@@ -16,21 +16,21 @@ This has some tricks to do stuff.
 #include "action_layer.h"
 
 
-#define work_left LALT(LCTRL(KC_LEFT))
-#define work_right LALT(LCTRL(KC_RIGHT))
+#define work_left LCTL(KC_LEFT)
+#define work_right LCTL(KC_RIGHT)
 
 
-#define spec_split_up LALT(KC_LGUI(KC_UP))
-#define spec_split_down LALT(KC_LGUI(KC_DOWN))
-#define spec_split_left  LALT(KC_LGUI(KC_LEFT))
-#define spec_split_right LALT(KC_LGUI(KC_RIGHT))
-#define spec_split_full LALT(KC_LGUI(KC_F))
+#define spec_split_up LALT(LGUI(KC_UP))
+#define spec_split_down LALT(LGUI(KC_DOWN))
+#define spec_split_left  LALT(LGUI(KC_LEFT))
+#define spec_split_right LALT(LGUI(KC_RIGHT))
+#define spec_split_full LALT(LGUI(KC_F))
 
-#define bar LCTRL(KC_LEFT)
-#define spec_monitor_right LCTRL(LALT(KC_LGUI(KC_RIGHT)))
+#define spec_monitor_left LCTL(LALT(LGUI(KC_LEFT)))
+#define spec_monitor_right LCTL(LALT(LGUI(KC_RIGHT)))
 
-#define mission_control LCTRL(KC_UP)
-#define mission_control_apps LCTRL(KC_DOWN)
+#define mission_control LCTL(KC_UP)
+#define mission_control_apps LCTL(KC_DOWN)
 
 
 enum preonic_layers {
@@ -132,7 +132,6 @@ This is the functionality to allow multiple keys to do multiple things.
  * Used for Spectacle window manipulation, change workspaces, etc
  */
 
-/*
 [_LOWER] = {
   {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
   {_______, _______,         spec_monitor_right, work_left,            work_right,      spec_monitor_left, _______,  _______, _______, _______, _______, _______},
@@ -140,14 +139,18 @@ This is the functionality to allow multiple keys to do multiple things.
   {_______, KC_TILD,         _______,            mission_control_apps, mission_control, _______,           _______,  _______, _______, _______, _______, _______},
   {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______}
 },
-*/
+/*
 [_LOWER] = {
   {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
-  {_______, _______,         _______, work_left,            work_right,      bar, _______,  _______, _______, _______, _______, _______},
+  {_______, _______,         spec_monitor_right, work_left,            work_right,      spec_monitor_left, _______,  _______, _______, _______, _______, _______},
   {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
   {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
   {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
+
+
+
 },
+*/
 
 
 /* Adjust (Lower + Raise)
