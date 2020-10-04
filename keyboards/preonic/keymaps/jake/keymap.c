@@ -10,20 +10,28 @@ This has some tricks to do stuff.
 	- This is how to get the shifted keys:
 		- https://docs.qmk.fm/feature_advanced_keycodes.html#shifted-keycodes
 
-
-
-
-
-
-
  */
 
 #include "preonic.h"
 #include "action_layer.h"
 
 
-#define workup LALT(LCTL(KC_UP))
-#define workdown LALT(LCTL(KC_DOWN))
+#define work_left LALT(LCTRL(KC_LEFT))
+#define work_right LALT(LCTRL(KC_RIGHT))
+
+
+#define spec_split_up LALT(KC_LGUI(KC_UP))
+#define spec_split_down LALT(KC_LGUI(KC_DOWN))
+#define spec_split_left  LALT(KC_LGUI(KC_LEFT))
+#define spec_split_right LALT(KC_LGUI(KC_RIGHT))
+#define spec_split_full LALT(KC_LGUI(KC_F))
+
+#define bar LCTRL(KC_LEFT)
+#define spec_monitor_right LCTRL(LALT(KC_LGUI(KC_RIGHT)))
+
+#define mission_control LCTRL(KC_UP)
+#define mission_control_apps LCTRL(KC_DOWN)
+
 
 enum preonic_layers {
   _QWERTY,
@@ -79,7 +87,7 @@ KC_LGUI - Windows
   {KC_PGDOWN,     KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,        KC_BSPC,  KC_Y,        KC_U,    KC_I,    KC_O,    KC_P   },
   {KC_LCTRL, KC_A,    KC_S,    KC_D,     KC_F,    KC_G,        KC_ENT,   KC_H,        KC_J,    KC_K,    KC_L,    KC_SCLN},
   {KC_LSFT,       KC_Z,    KC_X,    KC_C,     KC_V,    KC_B,        KC_TAB,   KC_N,        KC_M,    KC_COMM, KC_DOT,  KC_SLSH},
-  {KC_LALT,  workup,  workdown, KC_LGUI, LOWER,   KC_SPC,      RAISE,    KC_SPC,      KC_LEFT,    KC_DOWN, KC_UP, KC_RIGHT}
+  {KC_LALT,  _______,  _______, KC_LGUI, LOWER,   KC_SPC,      RAISE,    KC_SPC,      KC_LEFT,    KC_DOWN, KC_UP, KC_RIGHT}
 },
 
 
@@ -120,24 +128,25 @@ This is the functionality to allow multiple keys to do multiple things.
 
 
 /* Lower
- * ,-----------------------------------------------------------------------------------.
- * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
- * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Del  |
- * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   _  |   +  |   {  |   }  |  |   |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO ~ |ISO | |      |      |      |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      | Next | Vol- | Vol+ | Play |
- * `-----------------------------------------------------------------------------------'
+ * 
+ * Used for Spectacle window manipulation, change workspaces, etc
  */
+
+/*
 [_LOWER] = {
-  {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC},
-  {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL},
-  {KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE},
-  {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,S(KC_NUHS),S(KC_NUBS),KC_HOME, KC_END, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
+  {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
+  {_______, _______,         spec_monitor_right, work_left,            work_right,      spec_monitor_left, _______,  _______, _______, _______, _______, _______},
+  {_______, spec_split_full, spec_split_right,   spec_split_up,        spec_split_down, spec_split_left,   _______,  _______, _______, _______, _______, _______},
+  {_______, KC_TILD,         _______,            mission_control_apps, mission_control, _______,           _______,  _______, _______, _______, _______, _______},
+  {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______}
+},
+*/
+[_LOWER] = {
+  {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
+  {_______, _______,         _______, work_left,            work_right,      bar, _______,  _______, _______, _______, _______, _______},
+  {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
+  {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
+  {_______, _______,         _______,            _______,              _______,         _______,           _______,  _______, _______, _______, _______, _______},
 },
 
 
